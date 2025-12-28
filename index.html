@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Online Photo Booth</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- Masthead -->
+  <div class="masthead">
+    <span>The Darkroom Daily</span>
+    <span>EST. 1923</span>
+  </div>
+
+  <!-- Headline -->
+  <div class="headline">
+    <h1>MonoStrip</h1>
+    <p class="subhead">“Moments captured before they fade”</p>
+  </div>
+
+  <!-- Booth -->
+  <div class="booth">
+
+    <!-- Camera -->
+    <div>
+      <div class="camera">
+        <video id="video" autoplay playsinline></video>
+        <div id="countdown" class="countdown hidden">3</div>
+      </div>
+      <div class="camera-label">CAMERA NO. 04</div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+      <button id="startBtn">Start Booth</button>
+      <button id="stopBtn">Stop Camera</button>
+
+      <div class="side-notes">
+        <strong>Instructions</strong>
+        <p>• Sit still</p>
+        <p>• Look at the lens</p>
+        <p>• 4 shots will be taken</p>
+        <p>• No retakes mid-session</p>
+      </div>
+
+      <button id="uploadBtn">Add from Device</button>
+      <input type="file" id="fileInput" accept="image/*" hidden>
+
+      <button id="downloadBtn" class="hidden">Download PNG</button>
+      <button id="pdfBtn" class="hidden">Download PDF</button>
+
+      <button id="resetBtn" class="hidden">Retake</button>
+    </div>
+
+  </div>
+
+  <!-- Strip -->
+  <div class="strip-container">
+    <canvas id="stripCanvas"></canvas>
+  </div>
+  <div class="print-footer">
+    Printed in monochrome • MonoStrip © 2025
+  </div>
+  
+</div>
+
+<audio id="shutterSound" src="assets/shutter.mp3" preload="auto"></audio>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

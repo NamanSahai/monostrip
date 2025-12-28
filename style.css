@@ -1,0 +1,254 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Times New Roman", Georgia, serif;
+  }
+  
+  body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* 👈 KEY CHANGE */
+    padding: 40px 0;
+  
+    background:
+      radial-gradient(circle, rgba(255,255,255,0.9), rgba(230,225,215,0.95)),
+      url("https://www.transparenttextures.com/patterns/paper-fibers.png");
+  }
+  
+  
+  .app {
+    max-width: 900px;
+    width: 100%;
+    max-width: 900px;
+    min-height: calc(100vh - 80px);
+    padding: 30px;
+    background: #f7f4ee;
+    border: 1px solid #d4d0c8;
+    outline: 1px dashed rgba(0,0,0,0.2);
+    outline-offset: -8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  }
+  
+  .masthead {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  
+  .headline h1 {
+    text-align: center;
+    font-size: 2.4rem;
+    border-bottom: 2px solid #111;
+    padding-bottom: 10px;
+  }
+  
+  .subhead {
+    text-align: center;
+    font-size: 0.9rem;
+    margin-top: 6px;
+    font-style: italic;
+  }
+  
+  .booth {
+    display: flex;
+    gap: 30px;
+    margin-top: 30px;
+  }
+  
+  .camera {
+    position: relative;
+    width: 420px;
+    aspect-ratio: 300 / 220; /* MATCH STRIP */
+    background: #000;
+    border: 6px solid #111;
+    overflow: hidden;
+  }
+  
+  
+  .camera video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* crops correctly */
+    transform: scaleX(-1);
+    filter: grayscale(100%) contrast(1.1);
+  }
+  
+  
+  .camera::before,
+  .camera::after {
+    content: "";
+    position: absolute;
+    top: -10px;
+    width: 60px;
+    height: 18px;
+    background: rgba(255,255,255,0.6);
+    z-index: 2;
+  }
+  
+  .camera::before { left: 20px; transform: rotate(-5deg); }
+  .camera::after { right: 20px; transform: rotate(6deg); }
+  
+  .camera-label {
+    margin-top: 6px;
+    font-size: 0.7rem;
+  }
+  
+  .countdown {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    font-size: 6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+  }
+  
+  .controls {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  button {
+    padding: 12px;
+    background: #111;
+    color: #f7f4ee;
+    border: 2px solid #111;
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+  
+  button:hover {
+    background: #f7f4ee;
+    color: #111;
+  }
+  
+  .side-notes {
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+  
+  .strip-container {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  #stripCanvas {
+    background: white;
+    border: 2px solid #111;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .camera::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("https://www.transparenttextures.com/patterns/asfalt-light.png");
+    opacity: 0.15;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+  }
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+
+    body {
+      padding: 10px;
+      align-items: flex-start;
+    }
+  
+    .app {
+      padding: 16px;
+    }
+  
+    /* Stack everything vertically */
+    .booth {
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+  
+    /* Camera scales to screen */
+    .camera {
+      width: 100%;
+      max-width: 100%;
+      aspect-ratio: 300 / 220;
+    }
+  
+    .camera-label {
+      text-align: center;
+      margin-top: 4px;
+    }
+  
+    /* Controls full width */
+    .controls {
+      width: 100%;
+      align-items: stretch;
+    }
+  
+    .controls button {
+      width: 100%;
+      font-size: 1rem;
+      padding: 14px;
+    }
+  
+    .side-notes {
+      max-width: 100%;
+      font-size: 0.8rem;
+      text-align: center;
+    }
+  
+    /* Strip scales down nicely */
+    #stripCanvas {
+      max-width: 100%;
+      height: auto;
+    }
+  
+    .strip-container {
+      margin-top: 20px;
+    }
+  
+    /* Headings scale down */
+    .headline h1 {
+      font-size: 1.8rem;
+    }
+  
+    .subhead {
+      font-size: 0.85rem;
+    }
+  
+    .masthead {
+      font-size: 0.65rem;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: center;
+      text-align: center;
+    }
+  }
+  .print-footer {
+    margin-top: 30px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(0,0,0,0.2);
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #555;
+    text-align: center;
+  }
+      
