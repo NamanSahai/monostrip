@@ -68,7 +68,7 @@ monostrip/
 ### Clone the repository
 
 ```bash
-git clone https://github.com/your-username/monostrip.git
+git clone https://github.com/NamanSahai/monostrip.git
 ```
 
 ### Open the project
