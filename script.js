@@ -255,11 +255,14 @@ fileInput.onchange = e => {
 startBtn.onclick = startBooth;
 
 downloadBtn.onclick = () => {
-  const a = document.createElement("a");
-  a.download = "photobooth-strip.png";
-  a.href = canvas.toDataURL();
-  a.click();
+  printAnimation(() => {
+    const a = document.createElement("a");
+    a.download = "photobooth-strip.png";
+    a.href = canvas.toDataURL("image/png");
+    a.click();
+  });
 };
+
 
 resetBtn.onclick = () => {
   photos = [];
@@ -273,26 +276,65 @@ stopBtn.onclick = () => {
     countdownEl.classList.add("hidden");
   };
   pdfBtn.onclick = () => {
-    const { jsPDF } = window.jspdf;
+    printAnimation(() => {
+      const { jsPDF } = window.jspdf;
   
-    // Create PDF with exact canvas size
-    const pdf = new jsPDF({
-      orientation: "portrait",
-      unit: "px",
-      format: [canvas.width, canvas.height]
+      const pdf = new jsPDF({
+        orientation: "portrait",
+        unit: "px",
+        format: [canvas.width, canvas.height]
+      });
+  
+      const imgData = canvas.toDataURL("image/png", 1.0);
+  
+      pdf.addImage(
+        imgData,
+        "PNG",
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      );
+  
+      pdf.save("photobooth-strip.pdf");
     });
-  
-    const imgData = canvas.toDataURL("image/png", 1.0);
-  
-    pdf.addImage(
-      imgData,
-      "PNG",
-      0,
-      0,
-      canvas.width,
-      canvas.height
-    );
-  
-    pdf.save("photobooth-strip.pdf");
   };
+  
+  function playPrintSound() {
+    const sound = document.getElementById("printSound");
+  
+    if (!sound) return;
+  
+    sound.pause();
+    sound.currentTime = 0;
+  
+    sound.play().catch(() => {});
+  
+    // Stop exactly at 3 seconds
+    setTimeout(() => {
+      sound.pause();
+      sound.currentTime = 0;
+    }, 3000);
+  }
+  function printAnimation(callback) {
+    const printer = document.querySelector(".printer");
+    if (!printer) {
+      callback();
+      return;
+    }
+  
+    // Restart animation cleanly
+    printer.classList.remove("printing");
+    void printer.offsetWidth; // force reflow
+    printer.classList.add("printing");
+  
+    // Play print sound (3 seconds)
+    playPrintSound();
+  
+    // Run callback after animation ends
+    setTimeout(() => {
+      printer.classList.remove("printing");
+      callback();
+    }, 1600); // must match CSS animation duration
+  }
   

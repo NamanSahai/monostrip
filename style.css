@@ -251,4 +251,45 @@
     color: #555;
     text-align: center;
   }
-      
+
+/* =========================
+   PRINTER ANIMATION
+========================= */
+
+.printer {
+  position: relative;
+  width: fit-content;
+  overflow: hidden;
+  border-top: 6px solid #111; /* printer slot */
+  padding-top: 6px;
+}
+
+/* Initial hidden state */
+.printer.printing canvas {
+  animation: printOut 1.6s ease-out forwards;
+}
+
+@keyframes printOut {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Subtle paper shadow while printing */
+.printer.printing::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 6px;
+  height: 20px;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.25),
+    transparent
+  );
+  pointer-events: none;
+}

@@ -60,8 +60,10 @@
 
   <!-- Strip -->
   <div class="strip-container">
-    <canvas id="stripCanvas"></canvas>
-  </div>
+    <div class="printer">
+      <canvas id="stripCanvas"></canvas>
+    </div>
+  </div>  
   <div class="print-footer">
     Printed in monochrome • MonoStrip © 2025
   </div>
@@ -69,6 +71,7 @@
 </div>
 
 <audio id="shutterSound" src="assets/shutter.mp3" preload="auto"></audio>
+<audio id="printSound" src="assets/print.mp3" preload="auto"></audio>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="script.js"></script>
 </body>
